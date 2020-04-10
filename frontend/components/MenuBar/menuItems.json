@@ -1,0 +1,30 @@
+{
+  "data" : [
+    {
+        "name": "Dashboard",
+		"icon": "home",
+        "url": "/dashboard"
+    },
+    {
+      "name": "Admin Management",
+	  "icon": "tune",
+      "children": [
+        {
+			"name": "User Management",
+			"icon": "account_circle",
+			"url": "/user"
+        },
+        {
+          "name": "Menu Management",
+		  "icon": "menu",
+          "url": "/menu"
+        },
+        {
+          "name": "Role Management",
+		  "icon": "listalt",
+          "url": "/role"
+        }
+      ]
+    }
+  ]
+}
