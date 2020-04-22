@@ -1,0 +1,269 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Dokumentasi Covid-19 API",
+        "description": "Dokumentasi Covid-19 API menggunakan OpenAPI/Swagger",
+        "contact": {
+            "email": "davidsuwandi@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/survey": {
+            "get": {
+                "tags": [
+                    "top10"
+                ],
+                "summary": "Last 10 Survey",
+                "description": "Last 10 Survey",
+                "operationId": "survey",
+                "responses": {
+                    "default": {
+                        "description": "json response"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "create-survey"
+                ],
+                "summary": "Create Survey",
+                "description": "Isi Pertanyaan dari 1-21, dan latlon pengguna",
+                "operationId": "survey",
+                "parameters": [
+                    {
+                        "name": "jenis_kelamin",
+                        "in": "query",
+                        "description": "Jenis Kelamin (pria/wanita)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_1",
+                        "in": "query",
+                        "description": "Saya pergi keluar rumah",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_2",
+                        "in": "query",
+                        "description": "Saya menggunakan transportasi umum: online,angkot,bus,taksi,kereta api",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_3",
+                        "in": "query",
+                        "description": "Saya tidak memakai masker pada saat berkumpul dengan orang lain",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_4",
+                        "in": "query",
+                        "description": "Saya berjabat tangan dengan orang lain",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_5",
+                        "in": "query",
+                        "description": "Saya tidak membersihkan tangan dengan hand sanitizer/tissue basah sebelum pegang kemudi mobil/motor",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_6",
+                        "in": "query",
+                        "description": "Saya menyentuh benda/uang yang juga disentuh orang lain",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_7",
+                        "in": "query",
+                        "description": "Saya tidak menjaga jarak 1,5 meter dengan orang lain ketika: belanja, bekerja, belajar, ibadah",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_8",
+                        "in": "query",
+                        "description": "Saya makan diluar rumah (warung/restaurant)",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_9",
+                        "in": "query",
+                        "description": "Saya tidak minum hangat & cuci tangan dengan sabun setelah tiba di tujuan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_10",
+                        "in": "query",
+                        "description": "Saya berada di wilayah kelurahan tempat pasien tertular",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_11",
+                        "in": "query",
+                        "description": "Saya tidak pasang hand sanitizer di depan pintu masuk, untuk bersihkan tangan sebelum pegang gagang (handle) pintu masuk rumah",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_12",
+                        "in": "query",
+                        "description": "Saya tidak mencuci tangan dengan sabun setelah tiba di rumah",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_13",
+                        "in": "query",
+                        "description": "Saya tidak menyediakan: tissue basah/antiseptic, masker, sabun antiseptic bagi keluarga di rumah",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_14",
+                        "in": "query",
+                        "description": "Saya tidak segera merendam baju&celana bekas pakai di luar rumah kedalam air panas/sabun",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_15",
+                        "in": "query",
+                        "description": "Saya tidak segera mandi keramas setelah saya tiba di rumah",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_16",
+                        "in": "query",
+                        "description": "Saya tidak mensosialisasikan check list penilaian resiko pribadi ini kepada keluarga di rumah",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_17",
+                        "in": "query",
+                        "description": "Saya dalam sehari tidak kena cahaya matahari minimal 15 menit",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_18",
+                        "in": "query",
+                        "description": "Saya tidak jalan kaki/berolah raga minimal 30 menit setiap hari",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_19",
+                        "in": "query",
+                        "description": "Saya jarang minum vitamin C & E, dan kurang tidur",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_20",
+                        "in": "query",
+                        "description": "Usia saya diatas 60 tahun",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pertanyaan_21",
+                        "in": "query",
+                        "description": "Saya mempunyai penyakit: jantung/diabetes/gangguan pernafasan kronis",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "lat",
+                        "in": "query",
+                        "description": "Koordinat pengguna",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "lon",
+                        "in": "query",
+                        "description": "Koordinat pengguna",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "{\\'error\\': true/false, \\'message\\': \\'Output pesan\\'}, field error bisa berisi true/false, messagenya berupa pesan Resiko Rendah/Resiko Sedang/Resiko Tinggi"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "top10",
+            "description": "Top 10 Survey"
+        },
+        {
+            "name": "create-survey",
+            "description": "Insert Data Survey"
+        }
+    ]
+}

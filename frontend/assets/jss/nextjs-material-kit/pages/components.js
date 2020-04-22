@@ -57,7 +57,10 @@ const componentsStyle = theme => ({
   },
 	body: {
 		padding: '8px'
-	}
+  },
+  box: {
+    padding: '8px'
+  }
 });
 
 export default componentsStyle;

@@ -25,6 +25,8 @@ import PageChange from "components/PageChange/PageChange.js";
 
 import "assets/scss/nextjs-material-kit.scss?v=1.0.0";
 
+import 'assets/scss/style.scss'
+
 Router.events.on("routeChangeStart", url => {
   console.log(`Loading: ${url}`);
   document.body.classList.add("body-page-transition");
