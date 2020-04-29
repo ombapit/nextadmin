@@ -29,13 +29,19 @@ const styles = {
 class MenuBar extends Component {
   constructor( props ) {
     super( props )
-    this.state = {}
-  }
+		this.state = {}
+	}
+	
+	componentDidMount() {
+		if (this.props.active != "") {
+			this.setState({[this.props.active] : true});
+		}
+	}
 	
 	// this method sets the current state of a menu item i.e whether it is in expanded or collapsed or a collapsed state
 	handleClick( item ) {
 		this.setState( prevState => (
-			{ [ item ]: !prevState[ item ] } 
+			{ [ item ]: !prevState[ item ] }
 		) )
 	}
 	
@@ -51,14 +57,14 @@ class MenuBar extends Component {
 					<Link href={ subOption.url } key={ subOption.name }>
 						<div key={ subOption.name }>
 							<ListItem 
-								button 
+								button
 								key={ subOption.name }>
 									<a className={ classes.links }>
 										<ListItemIcon>
 											<Icon>{ subOption.icon }</Icon>
 										</ListItemIcon>
 										<ListItemText 
-											primary={ subOption.name } 
+											primary={subOption.name}
 										/>
 									</a>
 								{/*<Link 
@@ -84,7 +90,7 @@ class MenuBar extends Component {
 						</ListItemIcon>
 						<ListItemText
 							primary={ subOption.name } />
-						{ state[ subOption.name ] ? 
+						{ state[ subOption.name ] ? 						
 							<ExpandLess /> :
 							<ExpandMore />
 						}

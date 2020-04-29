@@ -1,4 +1,5 @@
 import React, {useState,useEffect, useCallback} from "react";
+import Head from "next/head";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import { CircularProgress, Typography, Button, Snackbar } from '@material-ui/core';
@@ -12,6 +13,8 @@ const useStyles = makeStyles(styles);
 
 import { fetchList, fetchCRUD } from '../utils/fetchJSON';
 
+//import add
+import Add from "pages-sections/User-Sections/add.js";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -21,6 +24,7 @@ export default function User(props) {
   const classes = useStyles();
   const { ...rest } = props;
 	
+	const [actPage,setActPage] = useState('index');
 	const [page, setPage] = useState(0);
 	const [count, setCount] = useState(1);
 	const [data, setData] = useState([["","Loading Data..."]]);
@@ -38,9 +42,10 @@ export default function User(props) {
 
 		setIsLoading(true);
 		let data = await fetchList(`${process.env.api}api/users?page=${page}`,{
-			method: 'POST',
-			body: { filter: { ...filterList }, order: order }
+			method: 'post',
+			data: { filter: { ...filterList }, order: order }
 		});
+		console.log(data);
 
 		const total = data.total;
 		data = data.data.map(item => {
@@ -58,8 +63,8 @@ export default function User(props) {
 	const deleteData = async (param) => {
 		setIsLoading(true);
 		let res = await fetchCRUD(`${process.env.api}api/users/delete_batch`,{
-			method: 'POST',
-			body: { param: param }
+			method: 'post',
+			data: { param: param }
 		});
 		setIsLoading(false);
 		//alert
@@ -182,31 +187,64 @@ export default function User(props) {
     }
     setAlert({'state':false,'msg':''});
 	};
-	
+
 	//form add
-	const formAdd = () => {
-		console.log('add');
+	function formHandle(formState) {
+		setActPage(formState);
 	}
-	
+
   return (
     <div className={classes.root}>
-      <Header
-        brand="Admin Dashboard - User"
-        {...rest}
-      />
-			<main className={classes.content}>
-				<div className={classes.toolbar} />
-					<MUIDataTable title={<Typography variant="h6">
-						User List&nbsp;
-						<Button variant="contained" color="primary">Add New</Button>
-						{isLoading && <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}} />}
-						</Typography>
-						} data={data} columns={columns} options={options} />
-			</main>
+				<Head>
+          <title>{`${process.env.web_title} - User Management`}</title>
+        </Head>
+				<Header
+					brand="User Management"
+					active="Admin Management"
+					{...rest}
+				/>
+				<main className={classes.content}>
+					<div className={classes.toolbar} />
+					{actPage == "index" &&
+						<MUIDataTable title={<Typography variant="h6">
+							User List&nbsp;
+							<Button variant="contained" color="primary" onClick={() => formHandle('add') }>Add New</Button>
+							{isLoading && <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}} />}
+							</Typography>
+							} data={data} columns={columns} options={options} />
+					}
+					{actPage == "add" &&
+						<Add onChange={formHandle}/>
+					}
+				</main>
 			
 			<Snackbar open={alert.state} autoHideDuration={6000} onClose={snackClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
 				<Alert onClose={snackClose} severity="success">{alert.msg}</Alert>
 			</Snackbar>
 		</div>
   );
+}
+
+User.getInitialProps = async({ req }) => {
+	// let data = await axiosList(`${process.env.api}api/users?page=1`,{
+	// 	method: 'POST',
+	// 	body: { }
+	// });
+
+	// const total = data.total;
+	// data = data.data.map(item => {
+	// 	return [item.id,item.name,item.email,item.created_at];
+	// });
+
+	// console.log(data);
+
+  // const resp = await axios.get(`http://${req.headers.host}/api/data`);
+  // const users = resp.data.map(user => {
+  //   return {
+  //     id: user.id,
+  //     FirstName: user.FirstName,
+  //     DateOfBirth: moment(user.DateOfBirth).format('MMMM Do YYYY'),
+  //   }
+  // });
+  // return { users };
 }

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Router from 'next/router';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -8,34 +9,37 @@ import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
-import MenuBar from 'components/MenuBar/MenuBar.js';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
+import MenuBar from 'components/MenuBar/MenuBar.js';
 import profileImage from "assets/img/faces/avatar.jpg";
+
+import {useShared} from 'store';
 
 import styles from "assets/jss/nextjs-material-kit/pages/componentsSections/headerStyle.js";
 
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
+  const { ...rest } = props;
+
   const classes = useStyles();
   const theme = useTheme();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const openAnchor = Boolean(anchorEl);
 
+  const [general,setGeneral] = useShared('general');
   const [open, setOpen] = React.useState(true);
 	
 	const handleMenu = (event) => {
@@ -52,6 +56,33 @@ export default function Header(props) {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  //logout script
+  const [dopen, setDopen] = React.useState(false);
+  const handleClickDopen = () => {
+    handleClose();
+    setDopen(true);
+  };
+  const logoutClose = () => {
+    setDopen(false);
+  };
+  const logoutAgree = () => {
+    setGeneral({
+      type: 'SET',
+      payload: {
+        state: 'authenticated',
+        data: false
+      }
+    })
+    setGeneral({
+      type: 'SET',
+      payload: {
+        state: 'user',
+        data: {}
+      }
+    })
+    Router.push('/login');
   };
 	
 	useEffect(() => {
@@ -121,7 +152,7 @@ export default function Header(props) {
 							onClose={handleClose}
 						>
 							<MenuItem onClick={handleClose}>My account</MenuItem>
-							<MenuItem onClick={handleClose}>Logout</MenuItem>
+							<MenuItem onClick={handleClickDopen}>Logout</MenuItem>
 						</Menu>
 					</div>
         </Toolbar>
@@ -151,9 +182,25 @@ export default function Header(props) {
         </div>
         <Divider />
         <List>
-					<MenuBar/>
+					<MenuBar {...rest}/>
         </List>
       </Drawer>
+
+      <Dialog
+        open={dopen}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Are you sure to logout?"}</DialogTitle>
+        <DialogActions>
+          <Button onClick={logoutClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={logoutAgree} color="primary" autoFocus>
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
 		</div>
   );
 }

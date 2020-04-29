@@ -1,18 +1,18 @@
 {
   "data" : [
     {
-        "name": "Dashboard",
-		"icon": "home",
-        "url": "/dashboard"
+      "name": "Dashboard",
+      "icon": "home",
+      "url": "/dashboard"
     },
     {
       "name": "Admin Management",
-	  "icon": "tune",
+	    "icon": "tune",
       "children": [
         {
-			"name": "User Management",
-			"icon": "account_circle",
-			"url": "/user"
+          "name": "User Management",
+          "icon": "account_circle",
+          "url": "/user"
         },
         {
           "name": "Menu Management",

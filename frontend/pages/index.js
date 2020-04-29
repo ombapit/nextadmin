@@ -1,12 +1,19 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import Router from "next/router";
 
-export default class Index extends Component {
-  componentDidMount = () => {
-    Router.push("/dashboard");
-  };
+import { useShared } from 'store'
 
-  render() {
-    return <div />;
-  }
+const Index = (props) => {
+  const [general, setGeneral] = useShared('general')
+
+  useEffect(() => {
+    if (general.authenticated == true) {
+      Router.push("/dashboard");
+    } else {
+      Router.push("/login");
+    }
+  },[])
+
+  return (<div/>)
 }
+export default Index

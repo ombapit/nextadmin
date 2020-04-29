@@ -1,8 +1,7 @@
 import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
+import {Paper, Typography } from '@material-ui/core';
 // core components
 import Header from "components/Header/Header.js";
 
@@ -17,6 +16,7 @@ export default function Menu(props) {
     <div className={classes.root}>
       <Header
         brand="Admin Dashboard - Menu"
+        active="Admin Management"
         {...rest}
       />
 			<main className={classes.content}>

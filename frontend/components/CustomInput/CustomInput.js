@@ -14,6 +14,7 @@ import styles from "assets/jss/nextjs-material-kit/components/customInputStyle.j
 const useStyles = makeStyles(styles);
 
 export default function CustomInput(props) {
+  // console.log(props);
   const classes = useStyles();
   const {
     formControlProps,

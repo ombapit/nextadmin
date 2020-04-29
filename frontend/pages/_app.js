@@ -23,6 +23,8 @@ import Router from "next/router";
 
 import PageChange from "components/PageChange/PageChange.js";
 
+import { SharedProvider } from 'store';
+
 import "assets/scss/nextjs-material-kit.scss?v=1.0.0";
 
 import 'assets/scss/style.scss'
@@ -46,23 +48,7 @@ Router.events.on("routeChangeError", () => {
 
 export default class MyApp extends App {
   componentDidMount() {
-    let comment = document.createComment(`
-
-=========================================================
-* NextJS Material Kit v1.0.0 based on Material Kit Free - v2.0.2 (Bootstrap 4.0.0 Final Edition) and Material Kit React v1.8.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/nextjs-material-kit
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/nextjs-material-kit/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-`);
+    let comment = document.createComment(``);
     document.insertBefore(comment, document.documentElement);
   }
   static async getInitialProps({ Component, router, ctx }) {
@@ -80,9 +66,11 @@ export default class MyApp extends App {
     return (
       <React.Fragment>
         <Head>
-          <title>Admin Dashboard</title>
+          <title>{`${process.env.web_title}`}</title>
         </Head>
-        <Component {...pageProps} />
+        <SharedProvider>
+          <Component {...pageProps} />
+        </SharedProvider>
       </React.Fragment>
     );
   }
